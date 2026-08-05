@@ -1,0 +1,27 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Pixelexon Vogue
+ * Design Tokens — Border Radius
+ * -----------------------------------------------------------------------------
+ *
+ * Purpose:
+ * - Define the global border radius scale.
+ * - Components consume these tokens.
+ * - Never hardcode border-radius values.
+ *
+ * -----------------------------------------------------------------------------
+ */
+
+:root {
+  --radius-none: 0;
+
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 24px;
+
+  --radius-full: 9999px;
+}

@@ -1,0 +1,63 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Pixelexon Vogue
+ * Design Tokens — Z-Index
+ * -----------------------------------------------------------------------------
+ *
+ * Purpose:
+ * - Define the global layering system.
+ * - Components consume these tokens.
+ * - Never use arbitrary z-index values.
+ *
+ * -----------------------------------------------------------------------------
+ */
+
+:root {
+  /* Base */
+
+  --z-index-base: 0;
+
+  /* Content */
+
+  --z-index-raised: 1;
+
+  /* Sticky Elements */
+
+  --z-index-sticky: 100;
+
+  /* Header */
+
+  --z-index-header: 200;
+
+  /* Dropdowns */
+
+  --z-index-dropdown: 300;
+
+  /* Drawer */
+
+  --z-index-drawer: 400;
+
+  /* Overlay */
+
+  --z-index-overlay: 500;
+
+  /* Modal */
+
+  --z-index-modal: 600;
+
+  /* Popover */
+
+  --z-index-popover: 700;
+
+  /* Tooltip */
+
+  --z-index-tooltip: 800;
+
+  /* Toast */
+
+  --z-index-toast: 900;
+
+  /* Highest */
+
+  --z-index-max: 999;
+}

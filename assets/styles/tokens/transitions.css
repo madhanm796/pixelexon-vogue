@@ -1,0 +1,55 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Pixelexon Vogue
+ * Design Tokens — Transitions
+ * -----------------------------------------------------------------------------
+ *
+ * Purpose:
+ * - Define transition durations and easing functions.
+ * - Components should consume these tokens instead of hardcoded values.
+ *
+ * -----------------------------------------------------------------------------
+ */
+
+:root {
+  /* ==========================================================================
+     Duration
+     ========================================================================== */
+
+  --transition-duration-fast: 150ms;
+  --transition-duration-normal: 250ms;
+  --transition-duration-slow: 400ms;
+
+  /* ==========================================================================
+     Timing Functions
+     ========================================================================== */
+
+  --transition-ease-linear: linear;
+
+  --transition-ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  --transition-ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  --transition-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ==========================================================================
+     Common Transitions
+     ========================================================================== */
+
+  --transition-color:
+    color var(--transition-duration-fast) var(--transition-ease-out),
+    background-color var(--transition-duration-fast) var(--transition-ease-out),
+    border-color var(--transition-duration-fast) var(--transition-ease-out);
+
+  --transition-opacity:
+    opacity var(--transition-duration-fast) var(--transition-ease-out);
+
+  --transition-transform:
+    transform var(--transition-duration-normal) var(--transition-ease-out);
+
+  --transition-shadow:
+    box-shadow var(--transition-duration-normal) var(--transition-ease-out);
+
+  --transition-all:
+    all var(--transition-duration-normal) var(--transition-ease-out);
+}

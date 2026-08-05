@@ -1,0 +1,81 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Pixelexon Vogue
+ * Base Layer — Accessibility
+ * -----------------------------------------------------------------------------
+ *
+ * Purpose:
+ * - Improve keyboard navigation.
+ * - Improve screen reader support.
+ * - Respect user accessibility preferences.
+ *
+ * -----------------------------------------------------------------------------
+ */
+
+/* ==========================================================================
+   Screen Reader Only
+   ========================================================================== */
+
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+
+  padding: 0;
+  margin: -1px;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  border: 0;
+
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+}
+
+/* ==========================================================================
+   Skip Link
+   ========================================================================== */
+
+.skip-link {
+  position: absolute;
+
+  top: var(--space-16);
+  left: var(--space-16);
+
+  z-index: var(--z-index-max);
+
+  padding: var(--space-12) var(--space-16);
+
+  color: var(--color-text-inverse);
+  background: var(--color-brand-primary);
+
+  text-decoration: none;
+
+  transform: translateY(-200%);
+  transition: var(--transition-transform);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Keyboard Focus
+   ========================================================================== */
+
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+}
