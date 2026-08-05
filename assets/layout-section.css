@@ -1,0 +1,67 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Pixelexon Vogue
+ * Layout — Section
+ * -----------------------------------------------------------------------------
+ *
+ * Purpose:
+ * - Provide consistent vertical spacing for sections.
+ * - Establish a predictable vertical rhythm.
+ * * Usage:
+ *
+ * <section class="px-section">
+ *   ...
+ * </section>
+ *
+ * <section class="px-section px-section--compact">
+ *   ...
+ * </section>
+ *
+ * -----------------------------------------------------------------------------
+ */
+
+/* ==========================================================================
+   Public API
+   ========================================================================== */
+
+.px-section {
+  --px-section-padding: var(--section-padding-desktop);
+
+  padding-block: var(--px-section-padding);
+}
+
+/* ==========================================================================
+   Variants
+   ========================================================================== */
+
+.px-section--compact {
+  --px-section-padding: var(--section-padding-compact);
+}
+
+.px-section--comfortable {
+  --px-section-padding: var(--section-padding-comfortable);
+}
+
+.px-section--spacious {
+  --px-section-padding: var(--section-padding-spacious);
+}
+
+.px-section--flush {
+  --px-section-padding: 0;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media screen and (max-width: 989px) {
+  .px-section {
+    --px-section-padding: var(--section-padding-tablet);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .px-section {
+    --px-section-padding: var(--section-padding-mobile);
+  }
+}

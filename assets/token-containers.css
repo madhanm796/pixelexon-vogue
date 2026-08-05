@@ -1,22 +1,49 @@
 /**
  * -----------------------------------------------------------------------------
  * Pixelexon Vogue
- * Design Tokens — Containers
- * -----------------------------------------------------------------------------
- *
- * Purpose:
- * - Define the maximum layout widths.
- * - Layout primitives consume these tokens.
- *
+ * Design Tokens — Layout
  * -----------------------------------------------------------------------------
  */
 
 :root {
+  /* Container Widths */
+
   --container-xs: 480px;
   --container-sm: 640px;
   --container-md: 768px;
   --container-lg: 1024px;
-  --container-xl: 1280px;
+  --container-xl: 1200px;
   --container-2xl: 1440px;
-  --container-full: 100%;
+  --container-fluid: 1600px;
+
+  /* Container Gutters */
+
+  --container-gutter-mobile: var(--space-16);
+  --container-gutter-tablet: var(--space-24);
+  --container-gutter-desktop: var(--space-32);
+
+  /* Section Spacing */
+
+  --section-padding-mobile: var(--space-32);
+  --section-padding-tablet: var(--space-48);
+  --section-padding-desktop: var(--space-64);
+
+  --section-padding-compact: var(--space-24);
+  --section-padding-comfortable: var(--space-80);
+  --section-padding-spacious: var(--space-96);
+
+  /* Grid */
+
+  --grid-gap-mobile: var(--space-16);
+  --grid-gap-tablet: var(--space-24);
+  --grid-gap-desktop: var(--space-32);
+
+  /* Stack */
+
+  --stack-gap-xs: var(--space-4);
+  --stack-gap-sm: var(--space-8);
+  --stack-gap-md: var(--space-16);
+  --stack-gap-lg: var(--space-24);
+  --stack-gap-xl: var(--space-32);
+  --stack-gap-2xl: var(--space-48);
 }

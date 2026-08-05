@@ -1,0 +1,137 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Pixelexon Vogue
+ * Layout — Grid
+ * -----------------------------------------------------------------------------
+ *
+ * Purpose:
+ * - Provide a responsive grid system.
+ * - Power product, collection, blog and marketing layouts.
+ * - Eliminate repeated grid implementations.
+ *
+ * Usage:
+ *
+ * <div class="px-grid px-grid--4">
+ *   ...
+ * </div>
+ *
+ * -----------------------------------------------------------------------------
+ */
+
+/* ==========================================================================
+   Public API
+   ========================================================================== */
+
+.px-grid {
+  --px-grid-columns: 1;
+  --px-grid-gap: var(--grid-gap-desktop);
+
+  display: grid;
+  grid-template-columns: repeat(var(--px-grid-columns), minmax(0, 1fr));
+  gap: var(--px-grid-gap);
+}
+
+/* ==========================================================================
+   Column Variants
+   ========================================================================== */
+
+.px-grid--1 {
+  --px-grid-columns: 1;
+}
+
+.px-grid--2 {
+  --px-grid-columns: 2;
+}
+
+.px-grid--3 {
+  --px-grid-columns: 3;
+}
+
+.px-grid--4 {
+  --px-grid-columns: 4;
+}
+
+.px-grid--5 {
+  --px-grid-columns: 5;
+}
+
+.px-grid--6 {
+  --px-grid-columns: 6;
+}
+
+/* ==========================================================================
+   Gap Variants
+   ========================================================================== */
+
+.px-grid--gap-none {
+  --px-grid-gap: 0;
+}
+
+.px-grid--gap-sm {
+  --px-grid-gap: var(--space-16);
+}
+
+.px-grid--gap-md {
+  --px-grid-gap: var(--grid-gap-tablet);
+}
+
+.px-grid--gap-lg {
+  --px-grid-gap: var(--grid-gap-desktop);
+}
+
+/* ==========================================================================
+   Alignment
+   ========================================================================== */
+
+.px-grid--align-start {
+  align-items: start;
+}
+
+.px-grid--align-center {
+  align-items: center;
+}
+
+.px-grid--align-end {
+  align-items: end;
+}
+
+.px-grid--justify-start {
+  justify-items: start;
+}
+
+.px-grid--justify-center {
+  justify-items: center;
+}
+
+.px-grid--justify-end {
+  justify-items: end;
+}
+
+.px-grid--justify-stretch {
+  justify-items: stretch;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media screen and (max-width: 989px) {
+
+  .px-grid {
+    --px-grid-gap: var(--grid-gap-tablet);
+  }
+
+  .px-grid--4,
+  .px-grid--5,
+  .px-grid--6 {
+    --px-grid-columns: 2;
+  }
+}
+
+@media screen and (max-width: 749px) {
+
+  .px-grid {
+    --px-grid-columns: 1;
+    --px-grid-gap: var(--grid-gap-mobile);
+  }
+}

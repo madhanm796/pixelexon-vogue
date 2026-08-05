@@ -1,0 +1,103 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Pixelexon Vogue
+ * Layout — Stack
+ * -----------------------------------------------------------------------------
+ *
+ * Purpose:
+ * - Arrange children vertically with consistent spacing.
+ * - Eliminate ad-hoc margin declarations.
+ * - Provide reusable spacing variants.
+ *
+ * Usage:
+ *
+ * <div class="px-stack">
+ *   ...
+ * </div>
+ *
+ * <div class="px-stack px-stack--lg">
+ *   ...
+ * </div>
+ *
+ * -----------------------------------------------------------------------------
+ */
+
+/* ==========================================================================
+   Public API
+   ========================================================================== */
+
+.px-stack {
+  --px-stack-gap: var(--stack-gap-lg);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--px-stack-gap);
+}
+
+/* ==========================================================================
+   Gap Variants
+   ========================================================================== */
+
+.px-stack--xs {
+  --px-stack-gap: var(--stack-gap-xs);
+}
+
+.px-stack--sm {
+  --px-stack-gap: var(--stack-gap-sm);
+}
+
+.px-stack--md {
+  --px-stack-gap: var(--stack-gap-md);
+}
+
+.px-stack--lg {
+  --px-stack-gap: var(--stack-gap-lg);
+}
+
+.px-stack--xl {
+  --px-stack-gap: var(--stack-gap-xl);
+}
+
+.px-stack--2xl {
+  --px-stack-gap: var(--stack-gap-2xl);
+}
+
+/* ==========================================================================
+   Alignment
+   ========================================================================== */
+
+.px-stack--start {
+  align-items: flex-start;
+}
+
+.px-stack--center {
+  align-items: center;
+}
+
+.px-stack--end {
+  align-items: flex-end;
+}
+
+.px-stack--stretch {
+  align-items: stretch;
+}
+
+/* ==========================================================================
+   Justification
+   ========================================================================== */
+
+.px-stack--top {
+  justify-content: flex-start;
+}
+
+.px-stack--middle {
+  justify-content: center;
+}
+
+.px-stack--bottom {
+  justify-content: flex-end;
+}
+
+.px-stack--between {
+  justify-content: space-between;
+}
