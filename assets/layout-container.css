@@ -1,0 +1,63 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Pixelexon Vogue
+ * Layout — Container
+ * -----------------------------------------------------------------------------
+ *
+ * Purpose:
+ * - Constrain content width.
+ * - Provide consistent horizontal gutters.
+ * - Support multiple container sizes.
+ *
+ * Usage:
+ *
+ * <div class="px-container">
+ *   ...
+ * </div>
+ *
+ * <div class="px-container px-container--wide">
+ *   ...
+ * </div>
+ *
+ * -----------------------------------------------------------------------------
+ */
+
+.px-container {
+  width: min(100% - (2 * var(--space-24)), var(--container-xl));
+  margin-inline: auto;
+}
+
+.px-container--xs {
+  max-width: var(--container-xs);
+}
+
+.px-container--sm {
+  max-width: var(--container-sm);
+}
+
+.px-container--md {
+  max-width: var(--container-md);
+}
+
+.px-container--lg {
+  max-width: var(--container-lg);
+}
+
+.px-container--xl {
+  max-width: var(--container-xl);
+}
+
+.px-container--2xl {
+  max-width: var(--container-2xl);
+}
+
+.px-container--full {
+  width: 100%;
+  max-width: none;
+}
+
+@media (max-width: 767px) {
+  .px-container {
+    width: min(100% - (2 * var(--space-16)), var(--container-xl));
+  }
+}
