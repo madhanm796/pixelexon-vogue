@@ -1,0 +1,339 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Pixelexon Vogue
+ * Component — Drawer
+ * -----------------------------------------------------------------------------
+ *
+ * Generic sliding panel.
+ *
+ * -----------------------------------------------------------------------------
+ */
+
+
+/* ==========================================================================
+   Component Tokens
+   ========================================================================== */
+
+:root {
+
+  --drawer-width-sm: 20rem;
+
+  --drawer-width-md: 26rem;
+
+  --drawer-width-lg: 32rem;
+
+  --drawer-padding: var(--space-24);
+
+  --drawer-shadow: var(--shadow-2xl);
+
+  --drawer-backdrop: rgb(0 0 0 / .55);
+
+}
+
+
+/* ==========================================================================
+   Overlay
+   ========================================================================== */
+
+.px-drawer {
+
+  position: fixed;
+
+  inset: 0;
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  background: var(--drawer-backdrop);
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity var(--transition-duration-normal) var(--transition-ease-out),
+    visibility var(--transition-duration-normal) var(--transition-ease-out);
+
+  z-index: var(--z-drawer);
+
+}
+
+.px-drawer.is-open {
+
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+
+}
+
+
+/* ==========================================================================
+   Panel
+   ========================================================================== */
+
+.px-drawer__panel {
+
+  inline-size: min(100%, var(--drawer-width-md));
+
+  block-size: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  background: var(--color-background);
+
+  color: var(--color-text);
+
+  box-shadow: var(--drawer-shadow);
+
+  transform: translateX(100%);
+
+  transition:
+    transform var(--transition-duration-normal)
+    var(--transition-ease-out);
+
+}
+
+.px-drawer.is-open .px-drawer__panel {
+
+  transform: translateX(0);
+
+}
+
+/* ==========================================================================
+   Sizes
+   ========================================================================== */
+
+.px-drawer--sm .px-drawer__panel {
+
+  inline-size: min(100%, var(--drawer-width-sm));
+
+}
+
+.px-drawer--md .px-drawer__panel {
+
+  inline-size: min(100%, var(--drawer-width-md));
+
+}
+
+.px-drawer--lg .px-drawer__panel {
+
+  inline-size: min(100%, var(--drawer-width-lg));
+
+}
+
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.px-drawer__header {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: var(--space-16);
+
+  padding: var(--drawer-padding);
+
+  border-block-end: 1px solid var(--color-border);
+
+}
+
+.px-drawer__title {
+
+  margin: 0;
+
+  font-size: var(--font-size-xl);
+
+  font-weight: var(--font-weight-semibold);
+
+}
+
+
+/* ==========================================================================
+   Body
+   ========================================================================== */
+
+.px-drawer__body {
+
+  flex: 1;
+
+  overflow-y: auto;
+
+  padding: var(--drawer-padding);
+
+}
+
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.px-drawer__footer {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: var(--space-16);
+
+  padding: var(--drawer-padding);
+
+  border-block-start: 1px solid var(--color-border);
+
+}
+
+/* ==========================================================================
+   Close
+   ========================================================================== */
+
+.px-drawer__close {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  inline-size: 2.5rem;
+
+  block-size: 2.5rem;
+
+  border: none;
+
+  border-radius: var(--radius-full);
+
+  background: transparent;
+
+  color: var(--color-text-muted);
+
+  cursor: pointer;
+
+  transition:
+    var(--transition-color),
+    var(--transition-shadow);
+
+}
+
+@media (hover:hover){
+
+  .px-drawer__close:hover{
+
+    background: var(--color-surface);
+
+    color: var(--color-text);
+
+  }
+
+}
+
+.px-drawer__close:focus-visible{
+
+  outline: none;
+
+  box-shadow: var(--shadow-focus);
+
+}
+
+
+/* ==========================================================================
+   Placement
+   ========================================================================== */
+
+.px-drawer--left {
+
+  justify-content: flex-start;
+
+}
+
+.px-drawer--left .px-drawer__panel {
+
+  transform: translateX(-100%);
+
+}
+
+.px-drawer--left.is-open .px-drawer__panel {
+
+  transform: translateX(0);
+
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+.px-drawer[hidden]{
+
+  display:none;
+
+}
+
+.px-drawer__panel:focus{
+
+  outline:none;
+
+}
+
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+  .px-drawer,
+  .px-drawer__panel{
+
+    transition:none;
+
+  }
+
+}
+
+
+/* ==========================================================================
+   High Contrast
+   ========================================================================== */
+
+@media (forced-colors:active){
+
+  .px-drawer__panel{
+
+    border:1px solid CanvasText;
+
+  }
+
+}
+
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media screen and (max-width:749px){
+
+  .px-drawer__panel{
+
+    inline-size:100%;
+
+  }
+
+  .px-drawer__header,
+  .px-drawer__body,
+  .px-drawer__footer{
+
+    padding:var(--space-16);
+
+  }
+
+}

@@ -1,0 +1,225 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Pixelexon Vogue
+ * Component — Badge
+ * -----------------------------------------------------------------------------
+ *
+ * Small status indicator.
+ *
+ * -----------------------------------------------------------------------------
+ */
+
+
+/* ==========================================================================
+   Component Tokens
+   ========================================================================== */
+
+:root {
+
+  --badge-height-sm: 1.5rem;
+  --badge-height-md: 1.75rem;
+  --badge-height-lg: 2rem;
+
+  --badge-padding-inline-sm: var(--space-8);
+  --badge-padding-inline-md: var(--space-12);
+  --badge-padding-inline-lg: var(--space-16);
+
+  --badge-radius: var(--radius-full);
+
+  --badge-font-size: var(--font-size-xs);
+
+  --badge-font-weight: var(--font-weight-semibold);
+
+}
+
+
+/* ==========================================================================
+   Public API
+   ========================================================================== */
+
+.px-badge {
+
+  --_badge-height: var(--badge-height-md);
+  --_badge-padding-inline: var(--badge-padding-inline-md);
+
+  --_badge-background: var(--color-brand-primary);
+  --_badge-color: var(--color-text-inverse);
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: var(--space-4);
+
+  min-block-size: var(--_badge-height);
+
+  padding-inline: var(--_badge-padding-inline);
+
+  border-radius: var(--badge-radius);
+
+  background: var(--_badge-background);
+
+  color: var(--_badge-color);
+
+  font-size: var(--badge-font-size);
+
+  font-weight: var(--badge-font-weight);
+
+  line-height: 1;
+
+  white-space: nowrap;
+
+  user-select: none;
+
+}
+
+
+/* ==========================================================================
+   Sizes
+   ========================================================================== */
+
+.px-badge--sm {
+
+  --_badge-height: var(--badge-height-sm);
+
+  --_badge-padding-inline: var(--badge-padding-inline-sm);
+
+}
+
+.px-badge--md {
+
+  --_badge-height: var(--badge-height-md);
+
+  --_badge-padding-inline: var(--badge-padding-inline-md);
+
+}
+
+.px-badge--lg {
+
+  --_badge-height: var(--badge-height-lg);
+
+  --_badge-padding-inline: var(--badge-padding-inline-lg);
+
+}
+
+/* ==========================================================================
+   Variants
+   ========================================================================== */
+
+.px-badge--primary {
+
+  --_badge-background: var(--color-brand-primary);
+
+  --_badge-color: var(--color-text-inverse);
+
+}
+
+.px-badge--secondary {
+
+  --_badge-background: var(--color-surface);
+
+  --_badge-color: var(--color-text);
+
+}
+
+.px-badge--outline {
+
+  --_badge-background: transparent;
+
+  --_badge-color: var(--color-text);
+
+  border: 1px solid var(--color-border);
+
+}
+
+.px-badge--success {
+
+  --_badge-background: var(--color-state-success);
+
+}
+
+.px-badge--warning {
+
+  --_badge-background: var(--color-state-warning);
+
+}
+
+.px-badge--danger {
+
+  --_badge-background: var(--color-state-danger);
+
+}
+
+.px-badge--info {
+
+  --_badge-background: var(--color-state-info);
+
+}
+
+/* ==========================================================================
+   Shape
+   ========================================================================== */
+
+.px-badge--rounded {
+
+  border-radius: var(--radius-md);
+
+}
+
+.px-badge--square {
+
+  border-radius: var(--radius-none);
+
+}
+
+
+/* ==========================================================================
+   Icon
+   ========================================================================== */
+
+.px-badge__icon {
+
+  inline-size: 0.875rem;
+
+  block-size: 0.875rem;
+
+}
+
+.px-badge__icon svg {
+
+  inline-size: 1em;
+
+  block-size: 1em;
+
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+@media (forced-colors: active){
+
+  .px-badge{
+
+    border:1px solid CanvasText;
+
+  }
+
+}
+
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media screen and (max-width:749px){
+
+  .px-badge{
+
+    font-size:var(--font-size-xs);
+
+  }
+
+}

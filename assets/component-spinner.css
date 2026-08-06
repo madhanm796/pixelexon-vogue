@@ -1,0 +1,167 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Pixelexon Vogue
+ * Component — Spinner
+ * -----------------------------------------------------------------------------
+ *
+ * Generic loading indicator.
+ *
+ * -----------------------------------------------------------------------------
+ */
+
+
+/* ==========================================================================
+   Component Tokens
+   ========================================================================== */
+
+:root {
+
+  --spinner-size-sm: 1rem;
+  --spinner-size-md: 1.5rem;
+  --spinner-size-lg: 2rem;
+
+  --spinner-border-width: 2px;
+
+  --spinner-duration: 0.75s;
+
+}
+
+
+/* ==========================================================================
+   Public API
+   ========================================================================== */
+
+.px-spinner {
+
+  --_spinner-size: var(--spinner-size-md);
+
+  --_spinner-color: currentColor;
+
+  display: inline-block;
+
+  inline-size: var(--_spinner-size);
+
+  block-size: var(--_spinner-size);
+
+  border: var(--spinner-border-width) solid color-mix(
+    in srgb,
+    var(--_spinner-color) 20%,
+    transparent
+  );
+
+  border-top-color: var(--_spinner-color);
+
+  border-radius: 50%;
+
+  animation:
+    px-spinner-rotate
+    var(--spinner-duration)
+    linear
+    infinite;
+
+}
+
+
+/* ==========================================================================
+   Sizes
+   ========================================================================== */
+
+.px-spinner--sm {
+
+  --_spinner-size: var(--spinner-size-sm);
+
+}
+
+.px-spinner--md {
+
+  --_spinner-size: var(--spinner-size-md);
+
+}
+
+.px-spinner--lg {
+
+  --_spinner-size: var(--spinner-size-lg);
+
+}
+
+
+/* ==========================================================================
+   Variants
+   ========================================================================== */
+
+.px-spinner--primary {
+
+  --_spinner-color: var(--color-brand-primary);
+
+}
+
+.px-spinner--inverse {
+
+  --_spinner-color: var(--color-text-inverse);
+
+}
+
+.px-spinner--success {
+
+  --_spinner-color: var(--color-state-success);
+
+}
+
+.px-spinner--danger {
+
+  --_spinner-color: var(--color-state-danger);
+
+}
+
+
+/* ==========================================================================
+   Animation
+   ========================================================================== */
+
+@keyframes px-spinner-rotate {
+
+  to {
+
+    transform: rotate(360deg);
+
+  }
+
+}
+
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .px-spinner {
+
+    animation-duration: 2s;
+
+  }
+
+}
+
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+.px-spinner[hidden] {
+
+  display: none;
+
+}
+
+@media (forced-colors: active) {
+
+  .px-spinner {
+
+    border-color: GrayText;
+
+    border-top-color: Highlight;
+
+  }
+
+}

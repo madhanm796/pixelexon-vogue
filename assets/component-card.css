@@ -1,0 +1,786 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Pixelexon Vogue
+ * Component — Card
+ * -----------------------------------------------------------------------------
+ *
+ * Generic content container.
+ * Powers:
+ * - Product Cards
+ * - Blog Cards
+ * - Collection Cards
+ * - Promotional Cards
+ *
+ * -----------------------------------------------------------------------------
+ */
+
+
+/* ==========================================================================
+   Component Tokens
+   ========================================================================== */
+
+:root {
+
+  --card-radius: var(--radius-xl);
+
+  --card-padding: var(--space-24);
+
+  --card-gap: var(--space-16);
+
+  --card-border-width: 1px;
+
+  --card-shadow: var(--shadow-none);
+
+}
+
+
+/* ==========================================================================
+   Public API
+   ========================================================================== */
+
+.px-card {
+
+  --_card-background: var(--color-background);
+
+  --_card-color: var(--color-text);
+
+  --_card-border: var(--color-border);
+
+  --_card-shadow: var(--card-shadow);
+
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background: var(--_card-background);
+
+  color: var(--_card-color);
+
+  border:
+    var(--card-border-width)
+    solid
+    var(--_card-border);
+
+  border-radius: var(--card-radius);
+
+  box-shadow: var(--_card-shadow);
+
+  transition:
+    var(--transition-color),
+    var(--transition-shadow),
+    var(--transition-transform);
+
+}
+
+
+/* ==========================================================================
+   Media
+   ========================================================================== */
+
+.px-card__media {
+
+  position: relative;
+
+  overflow: hidden;
+
+  aspect-ratio: 1;
+
+  background: var(--color-surface);
+
+}
+
+.px-card__media img,
+.px-card__media picture {
+
+  display: block;
+
+  inline-size: 100%;
+
+  block-size: 100%;
+
+  object-fit: cover;
+
+  transition: var(--transition-transform);
+
+}
+
+
+/* ==========================================================================
+   Body
+   ========================================================================== */
+
+.px-card__body {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: var(--card-gap);
+
+  padding: var(--card-padding);
+
+  flex: 1;
+
+}
+
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.px-card__footer {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: var(--space-12);
+
+  padding:
+    0
+    var(--card-padding)
+    var(--card-padding);
+
+}
+
+
+/* ==========================================================================
+   Title
+   ========================================================================== */
+
+.px-card__title {
+
+  margin: 0;
+
+  font-size: var(--font-size-lg);
+
+  font-weight: var(--font-weight-semibold);
+
+  line-height: var(--line-height-snug);
+
+  color: inherit;
+
+}
+
+
+/* ==========================================================================
+   Description
+   ========================================================================== */
+
+.px-card__description {
+
+  margin: 0;
+
+  color: var(--color-text-muted);
+
+  line-height: var(--line-height-normal);
+
+}
+
+/* ==========================================================================
+   Variants
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Default
+   -------------------------------------------------------------------------- */
+
+.px-card--default {
+
+  --_card-background: var(--color-background);
+
+  --_card-border: var(--color-border);
+
+  --_card-shadow: var(--shadow-none);
+
+}
+
+
+/* --------------------------------------------------------------------------
+   Elevated
+   -------------------------------------------------------------------------- */
+
+.px-card--elevated {
+
+  --_card-background: var(--color-background);
+
+  --_card-border: transparent;
+
+  --_card-shadow: var(--shadow-sm);
+
+}
+
+
+/* --------------------------------------------------------------------------
+   Outline
+   -------------------------------------------------------------------------- */
+
+.px-card--outline {
+
+  --_card-background: var(--color-background);
+
+  --_card-border: var(--color-border);
+
+  --_card-shadow: var(--shadow-none);
+
+}
+
+
+/* --------------------------------------------------------------------------
+   Flat
+   -------------------------------------------------------------------------- */
+
+.px-card--flat {
+
+  --_card-background: var(--color-surface);
+
+  --_card-border: transparent;
+
+  --_card-shadow: none;
+
+}
+
+
+/* ==========================================================================
+   Layout Variants
+   ========================================================================== */
+
+.px-card--horizontal {
+
+  flex-direction: row;
+
+}
+
+.px-card--horizontal .px-card__media {
+
+  flex: 0 0 40%;
+
+  aspect-ratio: auto;
+
+}
+
+.px-card--horizontal .px-card__body {
+
+  flex: 1;
+
+}
+
+.px-card--vertical {
+
+  flex-direction: column;
+
+}
+
+
+/* ==========================================================================
+   Interactive
+   ========================================================================== */
+
+.px-card--interactive {
+
+  cursor: pointer;
+
+}
+
+@media (hover:hover){
+
+  .px-card--interactive:hover{
+
+    transform: translateY(-2px);
+
+    box-shadow: var(--shadow-md);
+
+  }
+
+  .px-card--interactive:hover .px-card__media img{
+
+    transform: scale(1.04);
+
+  }
+
+}
+
+.px-card--interactive:active{
+
+  transform: translateY(0);
+
+}
+
+
+/* ==========================================================================
+   Card Link
+   ========================================================================== */
+
+.px-card__link{
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+}
+
+.px-card__link:focus-visible{
+
+  outline: none;
+
+  box-shadow: inset 0 0 0 2px var(--color-border-focus);
+
+}
+
+
+/* ==========================================================================
+   Media Overlay
+   ========================================================================== */
+
+.px-card__overlay{
+
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  padding: var(--space-16);
+
+  background:
+    linear-gradient(
+      to top,
+      rgb(0 0 0 / .55),
+      transparent 60%
+    );
+
+  color: var(--color-text-inverse);
+
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.px-card__header {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: var(--space-16);
+
+  padding:
+    var(--card-padding)
+    var(--card-padding)
+    0;
+
+}
+
+.px-card__header + .px-card__body {
+
+  padding-block-start: var(--space-16);
+
+}
+
+
+/* ==========================================================================
+   Eyebrow
+   ========================================================================== */
+
+.px-card__eyebrow {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: var(--space-8);
+
+  margin: 0;
+
+  font-size: var(--font-size-xs);
+
+  font-weight: var(--font-weight-medium);
+
+  letter-spacing: var(--letter-spacing-wide);
+
+  text-transform: uppercase;
+
+  color: var(--color-text-subtle);
+
+}
+
+
+/* ==========================================================================
+   Meta
+   ========================================================================== */
+
+.px-card__meta {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  gap: var(--space-8);
+
+  color: var(--color-text-muted);
+
+  font-size: var(--font-size-sm);
+
+}
+
+
+/* ==========================================================================
+   Actions
+   ========================================================================== */
+
+.px-card__actions {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: var(--space-8);
+
+  margin-block-start: auto;
+
+}
+
+
+/* ==========================================================================
+   Divider
+   ========================================================================== */
+
+.px-card__divider {
+
+  inline-size: 100%;
+
+  block-size: 1px;
+
+  background: var(--color-border);
+
+}
+
+
+/* ==========================================================================
+   Badge
+   ========================================================================== */
+
+.px-card__badge {
+
+  position: absolute;
+
+  inset-block-start: var(--space-16);
+
+  inset-inline-start: var(--space-16);
+
+  z-index: 2;
+
+}
+
+
+/* ==========================================================================
+   Media Content
+   ========================================================================== */
+
+.px-card__content {
+
+  position: relative;
+
+  z-index: 2;
+
+}
+
+
+/* ==========================================================================
+   Loading
+   ========================================================================== */
+
+.px-card--loading {
+
+  pointer-events: none;
+
+  user-select: none;
+
+}
+
+.px-card--loading .px-card__media,
+.px-card--loading .px-card__title,
+.px-card--loading .px-card__description,
+.px-card--loading .px-card__footer {
+
+  position: relative;
+
+  overflow: hidden;
+
+  background: var(--color-surface);
+
+  color: transparent;
+
+}
+
+.px-card--loading .px-card__title {
+
+  block-size: 1.25rem;
+
+  border-radius: var(--radius-sm);
+
+}
+
+.px-card--loading .px-card__description {
+
+  block-size: 3rem;
+
+  border-radius: var(--radius-sm);
+
+}
+
+.px-card--loading .px-card__media::after,
+.px-card--loading .px-card__title::after,
+.px-card--loading .px-card__description::after {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  transform: translateX(-100%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgb(255 255 255 / .45),
+      transparent
+    );
+
+  animation: px-card-skeleton 1.4s infinite;
+
+}
+
+@keyframes px-card-skeleton {
+
+  to {
+
+    transform: translateX(100%);
+
+  }
+
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+.px-card:focus-within {
+
+  box-shadow:
+    0 0 0 2px var(--color-border-focus),
+    var(--_card-shadow);
+
+}
+
+.px-card__link:focus {
+
+  outline: none;
+
+}
+
+.px-card__link:focus-visible {
+
+  outline: none;
+
+}
+
+.px-card[aria-disabled="true"] {
+
+  opacity: .6;
+
+  pointer-events: none;
+
+}
+
+.px-card[hidden] {
+
+  display: none;
+
+}
+
+
+/* ==========================================================================
+   Hover Enhancements
+   ========================================================================== */
+
+@media (hover:hover){
+
+  .px-card--interactive:hover .px-card__title{
+
+    color: var(--color-brand-primary);
+
+  }
+
+  .px-card--interactive:hover .px-card__overlay{
+
+    background:
+      linear-gradient(
+        to top,
+        rgb(0 0 0 / .65),
+        transparent 60%
+      );
+
+  }
+
+}
+
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce){
+
+  .px-card,
+  .px-card__media img,
+  .px-card__media::after,
+  .px-card__title,
+  .px-card__description{
+
+    transition: none;
+
+    animation: none;
+
+  }
+
+  .px-card--interactive:hover{
+
+    transform: none;
+
+  }
+
+  .px-card--interactive:hover .px-card__media img{
+
+    transform: none;
+
+  }
+
+}
+
+
+/* ==========================================================================
+   High Contrast
+   ========================================================================== */
+
+@media (forced-colors: active){
+
+  .px-card{
+
+    border-color: CanvasText;
+
+    box-shadow: none;
+
+  }
+
+  .px-card__link:focus-visible{
+
+    outline: 2px solid Highlight;
+
+    outline-offset: -2px;
+
+  }
+
+}
+
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media screen and (max-width: 989px){
+
+  .px-card{
+
+    border-radius: var(--radius-lg);
+
+  }
+
+  .px-card__body{
+
+    padding: var(--space-20);
+
+  }
+
+  .px-card__footer{
+
+    padding:
+      0
+      var(--space-20)
+      var(--space-20);
+
+  }
+
+}
+
+
+@media screen and (max-width: 749px){
+
+  .px-card--horizontal{
+
+    flex-direction: column;
+
+  }
+
+  .px-card--horizontal .px-card__media{
+
+    inline-size: 100%;
+
+    aspect-ratio: 1;
+
+  }
+
+  .px-card__body{
+
+    gap: var(--space-12);
+
+    padding: var(--space-16);
+
+  }
+
+  .px-card__footer{
+
+    flex-wrap: wrap;
+
+    padding:
+      0
+      var(--space-16)
+      var(--space-16);
+
+  }
+
+}
+
+
+/* ==========================================================================
+   Print
+   ========================================================================== */
+
+@media print{
+
+  .px-card{
+
+    box-shadow: none;
+
+    break-inside: avoid;
+
+  }
+
+}

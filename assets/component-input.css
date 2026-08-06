@@ -1,0 +1,781 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Pixelexon Vogue
+ * Component — Input
+ * -----------------------------------------------------------------------------
+ *
+ * Purpose:
+ * - Universal form input component
+ * - Accessible by default
+ * - Token driven
+ * - Merchant friendly
+ *
+ * -----------------------------------------------------------------------------
+ */
+
+
+/* ==========================================================================
+   Component Tokens
+   ========================================================================== */
+
+:root {
+
+  /* Heights */
+
+  --input-height-sm: 2.5rem;
+  --input-height-md: 3rem;
+  --input-height-lg: 3.5rem;
+
+  /* Padding */
+
+  --input-padding-inline-sm: var(--space-12);
+  --input-padding-inline-md: var(--space-16);
+  --input-padding-inline-lg: var(--space-20);
+
+  /* Typography */
+
+  --input-font-size-sm: var(--font-size-sm);
+  --input-font-size-md: var(--font-size-base);
+  --input-font-size-lg: var(--font-size-lg);
+
+  --input-font-weight: var(--font-weight-regular);
+
+  --input-line-height: var(--line-height-normal);
+
+  /* Radius */
+
+  --input-radius: var(--radius-lg);
+
+  /* Border */
+
+  --input-border-width: 1px;
+
+  /* Shadow */
+
+  --input-shadow: var(--shadow-none);
+
+}
+
+
+/* ==========================================================================
+   Public API
+   ========================================================================== */
+
+.px-input {
+
+  /* Internal Variables */
+
+  --_input-height: var(--input-height-md);
+
+  --_input-padding-inline: var(--input-padding-inline-md);
+
+  --_input-font-size: var(--input-font-size-md);
+
+  --_input-background: var(--color-background);
+
+  --_input-color: var(--color-text);
+
+  --_input-border-color: var(--color-border);
+
+  --_input-shadow: var(--input-shadow);
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: var(--space-8);
+
+  inline-size: 100%;
+
+  min-block-size: var(--_input-height);
+
+  padding-inline: var(--_input-padding-inline);
+
+  border: var(--input-border-width) solid var(--_input-border-color);
+
+  border-radius: var(--input-radius);
+
+  background: var(--_input-background);
+
+  color: var(--_input-color);
+
+  box-shadow: var(--_input-shadow);
+
+  transition:
+    var(--transition-color),
+    var(--transition-shadow);
+
+}
+
+
+/* ==========================================================================
+   Input Field
+   ========================================================================== */
+
+.px-input__field {
+
+  flex: 1;
+
+  inline-size: 100%;
+
+  min-inline-size: 0;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  color: inherit;
+
+  font: inherit;
+
+  font-size: var(--_input-font-size);
+
+  font-weight: var(--input-font-weight);
+
+  line-height: var(--input-line-height);
+
+  appearance: none;
+
+}
+
+.px-input__field::placeholder {
+
+  color: var(--color-text-muted);
+
+  opacity: 1;
+
+}
+
+
+/* ==========================================================================
+   Label
+   ========================================================================== */
+
+.px-input__label {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  margin-block-end: var(--space-8);
+
+  font-size: var(--font-size-sm);
+
+  font-weight: var(--font-weight-medium);
+
+  color: var(--color-text);
+
+}
+
+
+/* ==========================================================================
+   Helper Text
+   ========================================================================== */
+
+.px-input__helper {
+
+  margin-block-start: var(--space-8);
+
+  font-size: var(--font-size-sm);
+
+  line-height: var(--line-height-normal);
+
+  color: var(--color-text-muted);
+
+}
+
+
+/* ==========================================================================
+   Hover
+   ========================================================================== */
+
+@media (hover:hover){
+
+  .px-input:hover{
+
+    border-color: var(--color-border-strong);
+
+  }
+
+}
+
+
+/* ==========================================================================
+   Focus
+   ========================================================================== */
+
+.px-input:focus-within{
+
+  border-color: var(--color-border-focus);
+
+  box-shadow: var(--shadow-focus);
+
+}
+
+/* ==========================================================================
+   Sizes
+   ========================================================================== */
+
+.px-input--sm {
+
+  --_input-height: var(--input-height-sm);
+
+  --_input-padding-inline: var(--input-padding-inline-sm);
+
+  --_input-font-size: var(--input-font-size-sm);
+
+}
+
+.px-input--md {
+
+  --_input-height: var(--input-height-md);
+
+  --_input-padding-inline: var(--input-padding-inline-md);
+
+  --_input-font-size: var(--input-font-size-md);
+
+}
+
+.px-input--lg {
+
+  --_input-height: var(--input-height-lg);
+
+  --_input-padding-inline: var(--input-padding-inline-lg);
+
+  --_input-font-size: var(--input-font-size-lg);
+
+}
+
+
+/* ==========================================================================
+   Variants
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Default
+   -------------------------------------------------------------------------- */
+
+.px-input--default {
+
+  --_input-background: var(--color-background);
+
+  --_input-border-color: var(--color-border);
+
+}
+
+
+/* --------------------------------------------------------------------------
+   Filled
+   -------------------------------------------------------------------------- */
+
+.px-input--filled {
+
+  --_input-background: var(--color-surface);
+
+  --_input-border-color: transparent;
+
+}
+
+@media (hover:hover){
+
+  .px-input--filled:hover{
+
+    --_input-background: var(--color-surface-secondary);
+
+  }
+
+}
+
+
+/* --------------------------------------------------------------------------
+   Outline
+   -------------------------------------------------------------------------- */
+
+.px-input--outline {
+
+  --_input-background: transparent;
+
+  --_input-border-color: var(--color-border);
+
+}
+
+@media (hover:hover){
+
+  .px-input--outline:hover{
+
+    --_input-border-color: var(--color-border-strong);
+
+  }
+
+}
+
+
+/* --------------------------------------------------------------------------
+   Ghost
+   -------------------------------------------------------------------------- */
+
+.px-input--ghost {
+
+  --_input-background: transparent;
+
+  --_input-border-color: transparent;
+
+}
+
+@media (hover:hover){
+
+  .px-input--ghost:hover{
+
+    --_input-background: var(--color-surface);
+
+  }
+
+}
+
+
+/* ==========================================================================
+   Validation
+   ========================================================================== */
+
+.px-input--success {
+
+  --_input-border-color: var(--color-state-success);
+
+}
+
+.px-input--success:focus-within{
+
+  box-shadow:
+    0 0 0 3px rgb(22 163 74 / 15%);
+
+}
+
+
+.px-input--error {
+
+  --_input-border-color: var(--color-state-danger);
+
+}
+
+.px-input--error:focus-within{
+
+  box-shadow:
+    0 0 0 3px rgb(220 38 38 / 15%);
+
+}
+
+
+/* ==========================================================================
+   Disabled
+   ========================================================================== */
+
+.px-input--disabled,
+.px-input:has(.px-input__field:disabled){
+
+  opacity: .6;
+
+  cursor: not-allowed;
+
+  background: var(--color-surface);
+
+}
+
+.px-input__field:disabled{
+
+  cursor: inherit;
+
+}
+
+
+/* ==========================================================================
+   Readonly
+   ========================================================================== */
+
+.px-input:has(.px-input__field[readonly]){
+
+  background: var(--color-surface);
+
+}
+
+.px-input__field[readonly]{
+
+  cursor: default;
+
+}
+
+/* ==========================================================================
+   Icons
+   ========================================================================== */
+
+.px-input__icon {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  inline-size: 1.125rem;
+
+  block-size: 1.125rem;
+
+  color: var(--color-text-muted);
+
+}
+
+.px-input__icon svg {
+
+  inline-size: 1em;
+
+  block-size: 1em;
+
+  display: block;
+
+}
+
+
+/* ==========================================================================
+   Prefix / Suffix
+   ========================================================================== */
+
+.px-input__icon--prefix {
+
+  order: -1;
+
+}
+
+.px-input__icon--suffix {
+
+  order: 1;
+
+}
+
+
+/* ==========================================================================
+   Actions
+   ========================================================================== */
+
+.px-input__action {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  padding: var(--space-4);
+
+  border: 0;
+
+  background: transparent;
+
+  color: var(--color-text-muted);
+
+  cursor: pointer;
+
+  border-radius: var(--radius-sm);
+
+  transition:
+    var(--transition-color),
+    var(--transition-shadow);
+
+}
+
+@media (hover:hover){
+
+  .px-input__action:hover{
+
+    color: var(--color-text);
+
+    background: var(--color-surface);
+
+  }
+
+}
+
+.px-input__action:focus-visible{
+
+  outline: none;
+
+  box-shadow: var(--shadow-focus);
+
+}
+
+
+/* ==========================================================================
+   Clear Button
+   ========================================================================== */
+
+.px-input__clear {
+
+  display: none;
+
+}
+
+.px-input--clearable:not(.px-input--empty) .px-input__clear {
+
+  display: inline-flex;
+
+}
+
+
+/* ==========================================================================
+   Password Toggle
+   ========================================================================== */
+
+.px-input__toggle {
+
+  display: inline-flex;
+
+}
+
+
+/* ==========================================================================
+   Helper States
+   ========================================================================== */
+
+.px-input--error .px-input__helper{
+
+  color: var(--color-state-danger);
+
+}
+
+.px-input--success .px-input__helper{
+
+  color: var(--color-state-success);
+
+}
+
+
+/* ==========================================================================
+   Validation Message
+   ========================================================================== */
+
+.px-input__message{
+
+  display: block;
+
+  margin-block-start: var(--space-8);
+
+  font-size: var(--font-size-sm);
+
+  line-height: var(--line-height-normal);
+
+}
+
+.px-input__message--error{
+
+  color: var(--color-state-danger);
+
+}
+
+.px-input__message--success{
+
+  color: var(--color-state-success);
+
+}
+
+
+/* ==========================================================================
+   Character Counter
+   ========================================================================== */
+
+.px-input__footer{
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: var(--space-16);
+
+  margin-block-start: var(--space-8);
+
+}
+
+.px-input__counter{
+
+  margin-inline-start: auto;
+
+  font-size: var(--font-size-xs);
+
+  color: var(--color-text-subtle);
+
+}
+
+/* ==========================================================================
+   Native States
+   ========================================================================== */
+
+.px-input__field:user-invalid {
+
+  box-shadow: none;
+
+}
+
+.px-input:has(.px-input__field:user-invalid) {
+
+  --_input-border-color: var(--color-state-danger);
+
+}
+
+.px-input__field:user-valid {
+
+  box-shadow: none;
+
+}
+
+.px-input:has(.px-input__field:user-valid) {
+
+  --_input-border-color: var(--color-state-success);
+
+}
+
+
+/* ==========================================================================
+   Autofill
+   ========================================================================== */
+
+.px-input__field:-webkit-autofill,
+.px-input__field:-webkit-autofill:hover,
+.px-input__field:-webkit-autofill:focus {
+
+  -webkit-text-fill-color: var(--color-text);
+
+  -webkit-box-shadow: 0 0 0 1000px var(--_input-background) inset;
+
+  transition: background-color 9999s ease-in-out 0s;
+
+}
+
+
+/* ==========================================================================
+   Selection
+   ========================================================================== */
+
+.px-input__field::selection {
+
+  background: var(--color-selection-background);
+
+  color: var(--color-selection-text);
+
+}
+
+
+/* ==========================================================================
+   Focus
+   ========================================================================== */
+
+.px-input__field:focus {
+
+  outline: none;
+
+}
+
+
+/* ==========================================================================
+   Placeholder
+   ========================================================================== */
+
+.px-input__field::placeholder {
+
+  color: var(--color-text-muted);
+
+  opacity: 1;
+
+}
+
+
+/* ==========================================================================
+   Search Input
+   ========================================================================== */
+
+.px-input__field[type="search"]::-webkit-search-decoration,
+.px-input__field[type="search"]::-webkit-search-cancel-button,
+.px-input__field[type="search"]::-webkit-search-results-button,
+.px-input__field[type="search"]::-webkit-search-results-decoration {
+
+  appearance: none;
+
+}
+
+
+/* ==========================================================================
+   Textarea
+   ========================================================================== */
+
+textarea.px-input__field {
+
+  resize: vertical;
+
+  min-block-size: 8rem;
+
+  padding-block: var(--space-12);
+
+}
+
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .px-input,
+  .px-input__action {
+
+    transition: none;
+
+  }
+
+}
+
+
+/* ==========================================================================
+   High Contrast
+   ========================================================================== */
+
+@media (forced-colors: active) {
+
+  .px-input {
+
+    border-color: ButtonText;
+
+  }
+
+}
+
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media screen and (max-width: 749px) {
+
+  .px-input {
+
+    min-block-size: 44px;
+
+  }
+
+}
+
+
+/* ==========================================================================
+   Utility
+   ========================================================================== */
+
+.px-input--block {
+
+  inline-size: 100%;
+
+}
