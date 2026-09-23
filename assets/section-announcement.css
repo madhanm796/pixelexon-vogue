@@ -1,0 +1,86 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Pixelexon Vogue
+ * Section — Announcement Bar
+ * -----------------------------------------------------------------------------
+ */
+
+.announcement-bar {
+
+  background: var(--color-brand-primary);
+
+  color: var(--color-text-inverse);
+
+}
+
+.announcement-bar__content,
+.announcement-bar__link {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-block-size: 2.75rem;
+
+  padding-block: var(--space-8);
+
+  text-align: center;
+
+}
+
+.announcement-bar__link {
+
+  color: inherit;
+
+  text-decoration: none;
+
+  transition: var(--transition-color);
+
+}
+
+@media (hover:hover){
+
+  .announcement-bar__link:hover{
+
+    opacity: .85;
+
+  }
+
+}
+
+.announcement-bar__text {
+
+  font-size: var(--font-size-sm);
+
+  font-weight: var(--font-weight-medium);
+
+  line-height: var(--line-height-normal);
+
+  letter-spacing: var(--letter-spacing-normal);
+
+}
+
+@media (prefers-reduced-motion: reduce){
+
+  .announcement-bar__link{
+
+    transition: none;
+
+  }
+
+}
+
+@media screen and (max-width:749px){
+
+  .announcement-bar__content,
+  .announcement-bar__link{
+
+    min-block-size: 2.5rem;
+
+    padding-inline: var(--space-16);
+
+  }
+
+}

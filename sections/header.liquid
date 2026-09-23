@@ -1,76 +1,700 @@
-<header>
-  <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
-  </h2>
+{% liquid
+  assign logo_width = section.settings.logo_width
+  assign logo_width_mobile = section.settings.logo_width_mobile
 
-  <div class="header__menu">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+  assign header_class = 'px-header px-container--2xl'
 
-  <div class="header__icons">
-    {% if shop.customer_accounts_enabled %}
-      <shopify-account menu="{{ section.settings.customer_account_menu }}">
-        {{ 'icon-account.svg' | inline_asset_content }}
-      </shopify-account>
-    {% endif %}
+  if section.settings.sticky_header
+    assign header_class = header_class | append: ' px-header--sticky'
+  endif
 
-    <a href="{{ routes.cart_url }}">
-      {% if cart.item_count > 0 %}
-        <sup>{{ cart.item_count }}</sup>
+  if section.settings.transparent_header
+    assign header_class = header_class | append: ' px-header--transparent'
+  endif
+
+  if section.settings.show_border
+    assign header_class = header_class | append: ' px-header--border'
+  endif
+%}
+
+{{ 'section-header.css' | asset_url | stylesheet_tag }}
+
+<header
+  class="{{ header_class }}"
+  data-header
+  data-section-id="{{ section.id }}"
+  data-sticky="{{ section.settings.sticky_header }}"
+  style="
+    --header-logo-width: {{ logo_width }}px;
+    --header-logo-width-mobile: {{ logo_width_mobile }}px;
+    --header-height: {{ section.settings.header_height }}px;
+    --header-height-mobile: {{ section.settings.header_height_mobile }}px;
+    --header-background: {{ section.settings.background_color }};
+    --header-text-color: {{ section.settings.text_color }};
+    --header-border-color: {{ section.settings.border_color }};
+    --header-dropdown-background: {{ section.settings.dropdown_background }};
+    --header-dropdown-text: {{ section.settings.dropdown_text_color }};
+    --header-menu-gap: {{ section.settings.menu_gap }}px;
+    --header-padding-inline: {{ section.settings.padding_inline }}px;
+    --header-padding-inline-mobile: {{ section.settings.padding_inline_mobile }}px;
+  "
+>
+  <div class="px-container px-header__container">
+
+    {% comment %}
+      ------------------------------------------------------------------------
+      Mobile Menu Trigger
+      ------------------------------------------------------------------------
+    {% endcomment %}
+
+    <button
+      type="button"
+      class="px-header__menu-toggle"
+      data-header-menu-toggle
+      aria-expanded="false"
+      aria-controls="HeaderMobileMenu-{{ section.id }}"
+      aria-label="Open menu"
+    >
+      <span class="px-header__menu-icon" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+
+
+    {% comment %}
+      ------------------------------------------------------------------------
+      Logo
+      ------------------------------------------------------------------------
+    {% endcomment %}
+
+    <a
+      href="{{ routes.root_url }}"
+      class="px-header__logo"
+      aria-label="{{ shop.name | escape }}"
+    >
+      {% if section.settings.logo != blank %}
+
+        {{
+          section.settings.logo
+          | image_url: width: 600
+          | image_tag:
+            class: 'px-header__logo-image',
+            widths: '120, 180, 240, 300, 360, 480, 600',
+            sizes: '(max-width: 749px) var(--header-logo-width-mobile), var(--header-logo-width)',
+            loading: 'eager',
+            fetchpriority: 'high'
+        }}
+
+      {% else %}
+
+        <span class="px-header__logo-text">
+          {{ section.settings.logo_text | default: shop.name }}
+        </span>
+
+      {% endif %}
+    </a>
+
+
+    {% comment %}
+      ------------------------------------------------------------------------
+      Desktop Navigation
+      ------------------------------------------------------------------------
+    {% endcomment %}
+
+    <nav
+      class="px-header__navigation"
+      aria-label="Main navigation"
+    >
+      {% if section.settings.menu != blank %}
+
+        <ul class="px-header__menu" role="list">
+
+          {% for link in section.settings.menu.links %}
+
+            {% assign has_children = false %}
+
+            {% if link.links.size > 0 %}
+              {% assign has_children = true %}
+            {% endif %}
+
+            <li
+              class="
+                px-header__menu-item
+                {% if has_children %}px-header__menu-item--has-children{% endif %}
+              "
+            >
+
+              <a
+                href="{{ link.url }}"
+                class="px-header__menu-link"
+                {% if link.current %}
+                  aria-current="page"
+                {% endif %}
+              >
+                <span>{{ link.title }}</span>
+
+                {% if has_children %}
+                  <svg
+                    class="px-header__menu-chevron"
+                    viewBox="0 0 12 12"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <path
+                      d="M2 4.5 6 8l4-3.5"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                {% endif %}
+              </a>
+
+
+              {% if has_children %}
+
+                <div class="px-header__dropdown">
+
+                  <div class="px-header__dropdown-inner">
+
+                    <ul class="px-header__submenu" role="list">
+
+                      {% for child_link in link.links %}
+
+                        <li class="px-header__submenu-item">
+
+                          <a
+                            href="{{ child_link.url }}"
+                            class="px-header__submenu-link"
+                            {% if child_link.current %}
+                              aria-current="page"
+                            {% endif %}
+                          >
+                            {{ child_link.title }}
+                          </a>
+
+                          {% if child_link.links.size > 0 %}
+
+                            <ul
+                              class="px-header__subsubmenu"
+                              role="list"
+                            >
+
+                              {% for grandchild_link in child_link.links %}
+
+                                <li>
+
+                                  <a
+                                    href="{{ grandchild_link.url }}"
+                                    class="px-header__subsubmenu-link"
+                                    {% if grandchild_link.current %}
+                                      aria-current="page"
+                                    {% endif %}
+                                  >
+                                    {{ grandchild_link.title }}
+                                  </a>
+
+                                </li>
+
+                              {% endfor %}
+
+                            </ul>
+
+                          {% endif %}
+
+                        </li>
+
+                      {% endfor %}
+
+                    </ul>
+
+                  </div>
+
+                </div>
+
+              {% endif %}
+
+            </li>
+
+          {% endfor %}
+
+        </ul>
+
+      {% endif %}
+    </nav>
+
+
+    {% comment %}
+      ------------------------------------------------------------------------
+      Header Actions
+      ------------------------------------------------------------------------
+    {% endcomment %}
+
+    <div class="px-header__actions">
+
+      {% if section.settings.show_search %}
+
+        <a
+          href="{{ routes.search_url }}"
+          class="px-header__action"
+          aria-label="Search"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <circle
+              cx="11"
+              cy="11"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+            />
+            <path
+              d="m16 16 5 5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+            />
+          </svg>
+
+          {% if section.settings.show_action_labels %}
+            <span>Search</span>
+          {% endif %}
+        </a>
+
       {% endif %}
 
-      {{ 'icon-cart.svg' | inline_asset_content }}
-    </a>
+
+      {% if section.settings.show_account and shop.customer_accounts_enabled %}
+
+        <a
+          href="{{ routes.account_url }}"
+          class="px-header__action"
+          aria-label="Account"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <circle
+              cx="12"
+              cy="8"
+              r="3.25"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+            />
+            <path
+              d="M5 20c.8-3.4 3.2-5 7-5s6.2 1.6 7 5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+            />
+          </svg>
+
+          {% if section.settings.show_action_labels %}
+            <span>Account</span>
+          {% endif %}
+        </a>
+
+      {% endif %}
+
+
+      {% if section.settings.show_cart %}
+
+        <a
+          href="{{ routes.cart_url }}"
+          class="px-header__action px-header__cart"
+          aria-label="Cart"
+          data-cart-link
+        >
+          <span class="px-header__cart-icon">
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 1.9-1.4L21 8H6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <circle cx="10" cy="20" r="1" fill="currentColor" />
+              <circle cx="18" cy="20" r="1" fill="currentColor" />
+            </svg>
+
+            <span
+              class="px-header__cart-count"
+              data-cart-count
+              {% if cart.item_count == 0 %}
+                hidden
+              {% endif %}
+            >
+              {{ cart.item_count }}
+            </span>
+          </span>
+
+          {% if section.settings.show_action_labels %}
+            <span>Cart</span>
+          {% endif %}
+        </a>
+
+      {% endif %}
+
+    </div>
+
   </div>
+
+
+  {% comment %}
+    --------------------------------------------------------------------------
+    Mobile Navigation
+    --------------------------------------------------------------------------
+  {% endcomment %}
+
+  <div
+    id="HeaderMobileMenu-{{ section.id }}"
+    class="px-header__mobile"
+    data-header-mobile
+    aria-hidden="true"
+  >
+
+    <div class="px-header__mobile-panel">
+
+      <div class="px-header__mobile-header">
+
+        <span class="px-header__mobile-title">
+          Menu
+        </span>
+
+        <button
+          type="button"
+          class="px-header__mobile-close"
+          data-header-menu-close
+          aria-label="Close menu"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M5 5l14 14M19 5 5 19"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+
+      </div>
+
+
+      <nav
+        class="px-header__mobile-navigation"
+        aria-label="Mobile navigation"
+      >
+
+        {% if section.settings.menu != blank %}
+
+          <ul class="px-header__mobile-menu" role="list">
+
+            {% for link in section.settings.menu.links %}
+
+              <li class="px-header__mobile-item">
+
+                {% if link.links.size > 0 %}
+
+                  <details class="px-header__mobile-details">
+
+                    <summary class="px-header__mobile-link">
+                      <span>{{ link.title }}</span>
+
+                      <svg
+                        viewBox="0 0 12 12"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path
+                          d="M2 4.5 6 8l4-3.5"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </summary>
+
+                    <ul
+                      class="px-header__mobile-submenu"
+                      role="list"
+                    >
+
+                      <li>
+                        <a
+                          href="{{ link.url }}"
+                          class="px-header__mobile-sublink"
+                        >
+                          View {{ link.title }}
+                        </a>
+                      </li>
+
+                      {% for child_link in link.links %}
+
+                        <li>
+
+                          <a
+                            href="{{ child_link.url }}"
+                            class="px-header__mobile-sublink"
+                          >
+                            {{ child_link.title }}
+                          </a>
+
+                        </li>
+
+                      {% endfor %}
+
+                    </ul>
+
+                  </details>
+
+                {% else %}
+
+                  <a
+                    href="{{ link.url }}"
+                    class="px-header__mobile-link"
+                    {% if link.current %}
+                      aria-current="page"
+                    {% endif %}
+                  >
+                    {{ link.title }}
+                  </a>
+
+                {% endif %}
+
+              </li>
+
+            {% endfor %}
+
+          </ul>
+
+        {% endif %}
+
+      </nav>
+
+    </div>
+
+  </div>
+
 </header>
 
-{% stylesheet %}
-  header {
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  header a {
-    position: relative;
-    text-decoration: none;
-    color: var(--color-foreground);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  header a sup {
-    position: absolute;
-    left: 100%;
-    overflow: hidden;
-    max-width: var(--page-margin);
-  }
-  header svg {
-    width: 2rem;
-  }
-  header .header__menu,
-  header .header__icons {
-    display: flex;
-    gap: 1rem;
-  }
-{% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.header",
+  "name": "Header",
+  "class": "shopify-section-header",
+  "tag": "section",
   "settings": [
     {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "Pixelexon"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 60,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "default": 160
+    },
+    {
+      "type": "range",
+      "id": "logo_width_mobile",
+      "label": "Mobile logo width",
+      "min": 50,
+      "max": 220,
+      "step": 5,
+      "unit": "px",
+      "default": 120
+    },
+
+    {
+      "type": "header",
+      "content": "Navigation"
     },
     {
       "type": "link_list",
-      "id": "customer_account_menu",
-      "label": "t:labels.customer_account_menu",
-      "default": "customer-account-main-menu"
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "range",
+      "id": "menu_gap",
+      "label": "Menu spacing",
+      "min": 8,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+
+    {
+      "type": "header",
+      "content": "Header actions"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show search",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "Show account",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart",
+      "label": "Show cart",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_action_labels",
+      "label": "Show action labels",
+      "default": false
+    },
+
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "header_height",
+      "label": "Desktop header height",
+      "min": 56,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "header_height_mobile",
+      "label": "Mobile header height",
+      "min": 52,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_inline",
+      "label": "Desktop side spacing",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_inline_mobile",
+      "label": "Mobile side spacing",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+
+    {
+      "type": "header",
+      "content": "Behavior"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_header",
+      "label": "Enable sticky header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_header",
+      "label": "Transparent header",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border",
+      "label": "Show bottom border",
+      "default": true
+    },
+
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#171717"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#E5E5E5"
+    },
+    {
+      "type": "color",
+      "id": "dropdown_background",
+      "label": "Dropdown background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "dropdown_text_color",
+      "label": "Dropdown text",
+      "default": "#171717"
     }
   ]
 }

@@ -1,0 +1,24 @@
+{% liquid
+  assign has_link = false
+
+  if link != blank
+    assign has_link = true
+  endif
+%}
+
+{% if has_link %}
+  <a
+    href="{{ link }}"
+    class="announcement-bar__link"
+  >
+    <span class="announcement-bar__text">
+      {{ text }}
+    </span>
+  </a>
+{% else %}
+  <div class="announcement-bar__content">
+    <span class="announcement-bar__text">
+      {{ text }}
+    </span>
+  </div>
+{% endif %}

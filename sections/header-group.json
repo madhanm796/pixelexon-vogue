@@ -13,10 +13,42 @@
   "sections": {
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "logo": "shopify://shop_images/brand-logo_82a0bfe1-e370-4d65-a1d8-78c9e84eea78.png",
+        "logo_text": "Pixelexon",
+        "logo_width": 60,
+        "logo_width_mobile": 60,
+        "menu": "main-menu",
+        "menu_gap": 28,
+        "show_search": true,
+        "show_account": true,
+        "show_cart": true,
+        "show_action_labels": false,
+        "header_height": 76,
+        "header_height_mobile": 64,
+        "padding_inline": 24,
+        "padding_inline_mobile": 16,
+        "sticky_header": true,
+        "transparent_header": false,
+        "show_border": true,
+        "background_color": "#ffffff",
+        "text_color": "#171717",
+        "border_color": "#e5e5e5",
+        "dropdown_background": "#ffffff",
+        "dropdown_text_color": "#171717"
+      }
+    },
+    "announcement_bar_KJDDFN": {
+      "type": "announcement-bar",
+      "name": "Announcement Bar",
+      "settings": {
+        "text": "Free shipping on orders over ₹999",
+        "link": ""
+      }
     }
   },
   "order": [
+    "announcement_bar_KJDDFN",
     "header"
-  ],
+  ]
 }
