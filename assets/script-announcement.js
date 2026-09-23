@@ -7,11 +7,13 @@ class PixelexonAnnouncement {
   constructor(container) {
     this.container = container;
 
-    this.type = container.dataset.announcementType;
+    this.type =
+      container.dataset.announcementType;
 
-    this.slider = container.querySelector(
-      '[data-announcement-slider]'
-    );
+    this.slider =
+      container.querySelector(
+        '[data-announcement-slider]'
+      );
 
     this.slides = this.slider
       ? Array.from(
@@ -21,42 +23,56 @@ class PixelexonAnnouncement {
         )
       : [];
 
-    this.nextButton = container.querySelector(
-      '[data-announcement-next]'
-    );
+    this.nextButton =
+      container.querySelector(
+        '[data-announcement-next]'
+      );
 
-    this.prevButton = container.querySelector(
-      '[data-announcement-prev]'
-    );
+    this.prevButton =
+      container.querySelector(
+        '[data-announcement-prev]'
+      );
 
-    this.pauseButton = container.querySelector(
-      '[data-announcement-pause]'
-    );
+    this.pauseButton =
+      container.querySelector(
+        '[data-announcement-pause]'
+      );
 
-    this.closeButton = container.querySelector(
-      '[data-announcement-close]'
-    );
+    this.closeButton =
+      container.querySelector(
+        '[data-announcement-close]'
+      );
 
-    this.marquee = container.querySelector(
-      '[data-announcement-marquee]'
-    );
+    this.marquee =
+      container.querySelector(
+        '[data-announcement-marquee]'
+      );
 
     this.currentIndex = 0;
+
     this.rotationTimer = null;
+
     this.isPaused = false;
 
-    this.reducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    );
+    this.reducedMotion =
+      window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      );
 
     this.handleReducedMotionChange =
-      this.handleReducedMotionChange.bind(this);
+      this.handleReducedMotionChange.bind(
+        this
+      );
 
     this.handleKeydown =
       this.handleKeydown.bind(this);
 
     this.init();
   }
+
+  /* ==========================================================================
+     INIT
+     ========================================================================== */
 
   init() {
     if (this.type === 'slider') {
@@ -68,6 +84,7 @@ class PixelexonAnnouncement {
     }
 
     this.initDismiss();
+
     this.initThemeEditor();
 
     this.reducedMotion.addEventListener(
@@ -76,35 +93,44 @@ class PixelexonAnnouncement {
     );
   }
 
-  /* ------------------------------------------------------------------------
-     Slider
-     ------------------------------------------------------------------------ */
+  /* ==========================================================================
+     SLIDER
+     ========================================================================== */
 
   initSlider() {
-    if (!this.slides.length) return;
+    if (!this.slides.length) {
+      return;
+    }
 
     this.showSlide(0);
 
     this.nextButton?.addEventListener(
       'click',
-      () => this.next()
+      () => {
+        this.next();
+      }
     );
 
     this.prevButton?.addEventListener(
       'click',
-      () => this.previous()
+      () => {
+        this.previous();
+      }
     );
 
     this.pauseButton?.addEventListener(
       'click',
-      () => this.togglePause()
+      () => {
+        this.togglePause();
+      }
     );
 
     this.container.addEventListener(
       'mouseenter',
       () => {
         if (
-          this.container.dataset.pauseHover === 'true'
+          this.container.dataset
+            .pauseHover === 'true'
         ) {
           this.pauseRotation();
         }
@@ -115,7 +141,8 @@ class PixelexonAnnouncement {
       'mouseleave',
       () => {
         if (
-          this.container.dataset.pauseHover === 'true' &&
+          this.container.dataset
+            .pauseHover === 'true' &&
           !this.isPaused
         ) {
           this.startRotation();
@@ -127,7 +154,8 @@ class PixelexonAnnouncement {
       'focusin',
       () => {
         if (
-          this.container.dataset.pauseFocus === 'true'
+          this.container.dataset
+            .pauseFocus === 'true'
         ) {
           this.pauseRotation();
         }
@@ -138,8 +166,11 @@ class PixelexonAnnouncement {
       'focusout',
       (event) => {
         if (
-          this.container.dataset.pauseFocus === 'true' &&
-          !this.container.contains(event.relatedTarget) &&
+          this.container.dataset
+            .pauseFocus === 'true' &&
+          !this.container.contains(
+            event.relatedTarget
+          ) &&
           !this.isPaused
         ) {
           this.startRotation();
@@ -158,7 +189,9 @@ class PixelexonAnnouncement {
   }
 
   showSlide(index) {
-    if (!this.slides.length) return;
+    if (!this.slides.length) {
+      return;
+    }
 
     this.currentIndex =
       (index + this.slides.length) %
@@ -167,7 +200,8 @@ class PixelexonAnnouncement {
     this.slides.forEach(
       (slide, slideIndex) => {
         const active =
-          slideIndex === this.currentIndex;
+          slideIndex ===
+          this.currentIndex;
 
         slide.classList.toggle(
           'is-active',
@@ -176,13 +210,20 @@ class PixelexonAnnouncement {
 
         slide.setAttribute(
           'aria-hidden',
-          active ? 'false' : 'true'
+          active
+            ? 'false'
+            : 'true'
         );
 
         if (active) {
-          slide.removeAttribute('inert');
+          slide.removeAttribute(
+            'inert'
+          );
         } else {
-          slide.setAttribute('inert', '');
+          slide.setAttribute(
+            'inert',
+            ''
+          );
         }
       }
     );
@@ -218,7 +259,8 @@ class PixelexonAnnouncement {
 
     const delay =
       parseInt(
-        this.container.dataset.rotationDelay,
+        this.container.dataset
+          .rotationDelay,
         10
       ) || 5000;
 
@@ -290,15 +332,18 @@ class PixelexonAnnouncement {
     }
   }
 
-  /* ------------------------------------------------------------------------
-     Marquee
-     ------------------------------------------------------------------------ */
+  /* ==========================================================================
+     MARQUEE
+     ========================================================================== */
 
   initMarquee() {
-    if (!this.marquee) return;
+    if (!this.marquee) {
+      return;
+    }
 
     if (
-      this.container.dataset.pauseHover === 'true'
+      this.container.dataset
+        .pauseHover === 'true'
     ) {
       this.marquee.addEventListener(
         'mouseenter',
@@ -320,7 +365,8 @@ class PixelexonAnnouncement {
     }
 
     if (
-      this.container.dataset.pauseFocus === 'true'
+      this.container.dataset
+        .pauseFocus === 'true'
     ) {
       this.marquee.addEventListener(
         'focusin',
@@ -348,19 +394,23 @@ class PixelexonAnnouncement {
     }
   }
 
-  /* ------------------------------------------------------------------------
-     Dismiss
-     ------------------------------------------------------------------------ */
+  /* ==========================================================================
+     DISMISS
+     ========================================================================== */
 
   initDismiss() {
-    if (!this.closeButton) return;
+    if (!this.closeButton) {
+      return;
+    }
+
+    this.restoreDismissState();
 
     this.closeButton.addEventListener(
       'click',
-      () => this.dismiss()
+      () => {
+        this.dismiss();
+      }
     );
-
-    this.restoreDismissState();
   }
 
   dismiss() {
@@ -382,8 +432,8 @@ class PixelexonAnnouncement {
 
   restoreDismissState() {
     if (
-      this.container.dataset.dismissible !==
-      'true'
+      this.container.dataset
+        .dismissible !== 'true'
     ) {
       return;
     }
@@ -404,25 +454,35 @@ class PixelexonAnnouncement {
     }
   }
 
-  /* ------------------------------------------------------------------------
-     Accessibility
-     ------------------------------------------------------------------------ */
+  /* ==========================================================================
+     ACCESSIBILITY
+     ========================================================================== */
 
   handleKeydown(event) {
-    if (this.type !== 'slider') return;
+    if (this.type !== 'slider') {
+      return;
+    }
 
-    if (event.key === 'ArrowRight') {
+    if (
+      event.key === 'ArrowRight'
+    ) {
       event.preventDefault();
+
       this.next();
     }
 
-    if (event.key === 'ArrowLeft') {
+    if (
+      event.key === 'ArrowLeft'
+    ) {
       event.preventDefault();
+
       this.previous();
     }
   }
 
-  handleReducedMotionChange(event) {
+  handleReducedMotionChange(
+    event
+  ) {
     if (event.matches) {
       this.stopRotation();
     } else if (!this.isPaused) {
@@ -430,9 +490,9 @@ class PixelexonAnnouncement {
     }
   }
 
-  /* ------------------------------------------------------------------------
-     Shopify Theme Editor
-     ------------------------------------------------------------------------ */
+  /* ==========================================================================
+     SHOPIFY THEME EDITOR
+     ========================================================================== */
 
   initThemeEditor() {
     this.container.addEventListener(
@@ -477,6 +537,10 @@ class PixelexonAnnouncement {
     );
   }
 
+  /* ==========================================================================
+     DESTROY
+     ========================================================================== */
+
   destroy() {
     this.stopRotation();
 
@@ -493,7 +557,7 @@ class PixelexonAnnouncement {
 }
 
 /* ==========================================================================
-   Initialization
+   INSTANCE MANAGEMENT
    ========================================================================== */
 
 const announcementInstances =
@@ -533,7 +597,7 @@ const initAnnouncementBars = (
 initAnnouncementBars();
 
 /* ==========================================================================
-   Shopify Theme Editor
+   SHOPIFY THEME EDITOR EVENTS
    ========================================================================== */
 
 document.addEventListener(
@@ -553,7 +617,9 @@ document.addEventListener(
         '[data-announcement]'
       );
 
-    if (!announcement) return;
+    if (!announcement) {
+      return;
+    }
 
     const instance =
       announcementInstances.get(
