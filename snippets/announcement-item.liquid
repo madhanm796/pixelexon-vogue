@@ -1,24 +1,245 @@
-{% liquid
-  assign has_link = false
+<div
+  class="{{ class }}"
+  {% if slide_index != blank %}
+    data-announcement-slide
+    data-slide-index="{{ slide_index }}"
+    {% if slide_index == 0 %}
+      aria-hidden="false"
+    {% else %}
+      aria-hidden="true"
+    {% endif %}
+  {% endif %}
+  {{ block.shopify_attributes }}
+  style="
+    --announcement-item-text: {{ block.settings.text_color }};
 
-  if link != blank
-    assign has_link = true
-  endif
-%}
+    --announcement-item-bg:
+      {% if block.settings.use_custom_background %}
+        {{ block.settings.background_color }}
+      {% else %}
+        transparent
+      {% endif %};
+  "
+>
+  {% if block.settings.icon != 'none' %}
+    <span
+      class="
+        px-announcement__icon
+        px-announcement__icon--{{ block.settings.icon }}
+      "
+      aria-hidden="true"
+    >
+      {% case block.settings.icon %}
 
-{% if has_link %}
-  <a
-    href="{{ link }}"
-    class="announcement-bar__link"
-  >
-    <span class="announcement-bar__text">
-      {{ text }}
+        {% when 'truck' %}
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M3 6H15V17H3V6Z"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <path
+              d="M15 9H19L21 12V17H15V9Z"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <circle
+              cx="7"
+              cy="18"
+              r="2"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <circle
+              cx="18"
+              cy="18"
+              r="2"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+          </svg>
+
+        {% when 'gift' %}
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M3 10H21V20H3V10Z"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <path
+              d="M12 10V20"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <path
+              d="M3 10H21V6H3V10Z"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <path
+              d="M12 6C10 2 6 3 7 5C8 7 10 7 12 6Z"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <path
+              d="M12 6C14 2 18 3 17 5C16 7 14 7 12 6Z"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+          </svg>
+
+        {% when 'tag' %}
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M3 12L12 3H20V11L11 20L3 12Z"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <circle
+              cx="16"
+              cy="7"
+              r="1.5"
+              fill="currentColor"
+            />
+          </svg>
+
+        {% when 'sparkle' %}
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M12 2L13.7 8.3L20 10L13.7 11.7L12 18L10.3 11.7L4 10L10.3 8.3L12 2Z"
+              fill="currentColor"
+            />
+            <path
+              d="M19 16L19.8 18.2L22 19L19.8 19.8L19 22L18.2 19.8L16 19L18.2 18.2L19 16Z"
+              fill="currentColor"
+            />
+          </svg>
+
+        {% when 'star' %}
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M12 3L14.8 8.7L21 9.6L16.5 14L17.6 20.2L12 17.3L6.4 20.2L7.5 14L3 9.6L9.2 8.7L12 3Z"
+              fill="currentColor"
+            />
+          </svg>
+
+        {% when 'heart' %}
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M20.8 8.6C20.8 14.3 12 20 12 20C12 20 3.2 14.3 3.2 8.6C3.2 5.8 5.2 4 7.8 4C9.5 4 11 4.9 12 6.2C13 4.9 14.5 4 16.2 4C18.8 4 20.8 5.8 20.8 8.6Z"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+          </svg>
+
+        {% when 'check' %}
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M5 12L10 17L19 7"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+        {% when 'info' %}
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle
+              cx="12"
+              cy="12"
+              r="9"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <path
+              d="M12 11V16"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+            <circle
+              cx="12"
+              cy="8"
+              r="1"
+              fill="currentColor"
+            />
+          </svg>
+
+      {% endcase %}
     </span>
-  </a>
-{% else %}
-  <div class="announcement-bar__content">
-    <span class="announcement-bar__text">
-      {{ text }}
+  {% endif %}
+
+  {% if block.settings.badge != blank %}
+    <span class="px-announcement__badge">
+      {{ block.settings.badge }}
     </span>
-  </div>
-{% endif %}
+  {% endif %}
+
+  {% if block.settings.link != blank %}
+
+    {% if block.settings.link_label != blank %}
+
+      <span class="px-announcement__message-text">
+        {{ block.settings.text }}
+      </span>
+
+      <a
+        href="{{ block.settings.link }}"
+        class="px-announcement__link"
+        {% if block.settings.open_new_tab %}
+          target="_blank"
+          rel="noopener noreferrer"
+        {% endif %}
+      >
+        <span>
+          {{ block.settings.link_label }}
+        </span>
+
+        {% if block.settings.show_arrow %}
+          <span
+            class="px-announcement__arrow"
+            aria-hidden="true"
+          >
+            →
+          </span>
+        {% endif %}
+      </a>
+
+    {% else %}
+
+      <a
+        href="{{ block.settings.link }}"
+        class="
+          px-announcement__link
+          px-announcement__link--message
+        "
+        {% if block.settings.open_new_tab %}
+          target="_blank"
+          rel="noopener noreferrer"
+        {% endif %}
+      >
+        <span>
+          {{ block.settings.text }}
+        </span>
+
+        {% if block.settings.show_arrow %}
+          <span
+            class="px-announcement__arrow"
+            aria-hidden="true"
+          >
+            →
+          </span>
+        {% endif %}
+      </a>
+
+    {% endif %}
+
+  {% else %}
+
+    <span class="px-announcement__message-text">
+      {{ block.settings.text }}
+    </span>
+
+  {% endif %}
+</div>
