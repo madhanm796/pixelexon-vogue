@@ -11,6 +11,102 @@
   "type": "header",
   "name": "t:general.header",
   "sections": {
+    "announcement_bar_jCqUXm": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_9c7PzK": {
+          "type": "announcement",
+          "settings": {
+            "enabled": true,
+            "text": "Free shipping on orders over ₹999",
+            "link": "",
+            "link_label": "",
+            "open_new_tab": false,
+            "icon": "truck",
+            "badge": "",
+            "show_arrow": false,
+            "use_custom_background": false,
+            "background_color": "#111111",
+            "text_color": "#ffffff"
+          }
+        },
+        "announcement_QDMUYR": {
+          "type": "announcement",
+          "settings": {
+            "enabled": true,
+            "text": "10% off your first order",
+            "link": "",
+            "link_label": "",
+            "open_new_tab": false,
+            "icon": "tag",
+            "badge": "",
+            "show_arrow": false,
+            "use_custom_background": false,
+            "background_color": "#111111",
+            "text_color": "#ffffff"
+          }
+        },
+        "announcement_BKaUrp": {
+          "type": "announcement",
+          "settings": {
+            "enabled": true,
+            "text": "Easy returns & secure payments",
+            "link": "",
+            "link_label": "",
+            "open_new_tab": false,
+            "icon": "check",
+            "badge": "",
+            "show_arrow": false,
+            "use_custom_background": false,
+            "background_color": "#111111",
+            "text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_9c7PzK",
+        "announcement_QDMUYR",
+        "announcement_BKaUrp"
+      ],
+      "name": "Announcement bar",
+      "settings": {
+        "type": "slider",
+        "position": "above_header",
+        "sticky": false,
+        "dismissible": false,
+        "rotation_delay": 3,
+        "transition": "slide",
+        "transition_duration": 400,
+        "show_arrows": false,
+        "show_pause": false,
+        "marquee_speed": 35,
+        "marquee_direction": "left",
+        "separator": "dot",
+        "pause_on_hover": true,
+        "pause_on_focus": true,
+        "height": "standard",
+        "desktop_height": 40,
+        "mobile_height": 38,
+        "content_width": 1450,
+        "text_alignment": "center",
+        "padding_inline": 24,
+        "mobile_padding_inline": 16,
+        "item_gap": 40,
+        "font_size_desktop": 14,
+        "font_size_mobile": 12,
+        "font_weight": "600",
+        "letter_spacing": 0,
+        "background_color": "#111111",
+        "text_color": "#ffffff",
+        "mobile_background_color": "#111111",
+        "mobile_text_color": "#ffffff",
+        "show_border": false,
+        "border_color": "#333333",
+        "border_width": 1,
+        "enable_shadow": false,
+        "border_radius": 0
+      }
+    },
     "header": {
       "type": "header",
       "settings": {
@@ -35,102 +131,6 @@
         "border_color": "#e5e5e5",
         "dropdown_background": "#ffffff",
         "dropdown_text_color": "#171717"
-      }
-    },
-    "announcement_bar_jCqUXm": {
-      "type": "announcement-bar",
-      "blocks": {
-        "announcement_9c7PzK": {
-          "type": "announcement",
-          "settings": {
-            "enabled": true,
-            "text": "Free shipping on orders over ₹999",
-            "link": "",
-            "link_label": "",
-            "open_new_tab": false,
-            "icon": "truck",
-            "badge": "",
-            "show_arrow": false,
-            "use_custom_background": false,
-            "background_color": "#111111",
-            "text_color": "#FFFFFF"
-          }
-        },
-        "announcement_QDMUYR": {
-          "type": "announcement",
-          "settings": {
-            "enabled": true,
-            "text": "10% off your first order",
-            "link": "",
-            "link_label": "",
-            "open_new_tab": false,
-            "icon": "tag",
-            "badge": "",
-            "show_arrow": false,
-            "use_custom_background": false,
-            "background_color": "#111111",
-            "text_color": "#FFFFFF"
-          }
-        },
-        "announcement_BKaUrp": {
-          "type": "announcement",
-          "settings": {
-            "enabled": true,
-            "text": "Easy returns & secure payments",
-            "link": "",
-            "link_label": "",
-            "open_new_tab": false,
-            "icon": "check",
-            "badge": "",
-            "show_arrow": false,
-            "use_custom_background": false,
-            "background_color": "#111111",
-            "text_color": "#FFFFFF"
-          }
-        }
-      },
-      "block_order": [
-        "announcement_9c7PzK",
-        "announcement_QDMUYR",
-        "announcement_BKaUrp"
-      ],
-      "name": "Announcement bar",
-      "settings": {
-        "type": "static",
-        "position": "above_header",
-        "sticky": false,
-        "dismissible": false,
-        "rotation_delay": 5,
-        "transition": "fade",
-        "transition_duration": 400,
-        "show_arrows": false,
-        "show_pause": false,
-        "marquee_speed": 35,
-        "marquee_direction": "left",
-        "separator": "dot",
-        "pause_on_hover": true,
-        "pause_on_focus": true,
-        "height": "standard",
-        "desktop_height": 40,
-        "mobile_height": 38,
-        "content_width": 1450,
-        "text_alignment": "center",
-        "padding_inline": 24,
-        "mobile_padding_inline": 16,
-        "item_gap": 40,
-        "font_size_desktop": 13,
-        "font_size_mobile": 12,
-        "font_weight": "500",
-        "letter_spacing": 0,
-        "background_color": "#111111",
-        "text_color": "#FFFFFF",
-        "mobile_background_color": "#111111",
-        "mobile_text_color": "#FFFFFF",
-        "show_border": false,
-        "border_color": "#333333",
-        "border_width": 1,
-        "enable_shadow": false,
-        "border_radius": 0
       }
     }
   },
