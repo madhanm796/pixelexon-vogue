@@ -8,5 +8,8 @@
  * ------------------------------------------------------------
  */
 {
-  "current": {}
+  "current": {
+    "type_primary_font": "sans_serif_n4",
+    "content_for_index": []
+  }
 }
